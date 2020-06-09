@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const morgan = require('morgan');
 const app = express();
 const PORT = 8080; // default port 8080
 
@@ -8,7 +8,7 @@ function generateRandomString() {
   let randomString = Math.random().toString(36).slice(-6);
   return randomString;
 }
-
+app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.set("view engine", "ejs");
@@ -54,6 +54,13 @@ app.post("/urls", (req, res) => {
   urlDatabase[shortUrl] = req.body.longURL;
     //console.log(req.body);  // Log the POST request body to the console
   res.redirect(`/urls/${shortUrl}`);
+});
+
+app.post("/urls/:shortURL/delete", (req, res) => {
+
+  delete urlDatabase[req.params.shortURL] ;
+    //console.log(req.body);  // Log the POST request body to the console
+  res.redirect(`/urls`);
 });
 
 
