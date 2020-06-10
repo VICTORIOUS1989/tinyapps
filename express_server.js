@@ -53,7 +53,7 @@ app.post("/urls", (req, res) => {
   let shortUrl = generateRandomString();
   urlDatabase[shortUrl] = req.body.longURL;
     //console.log(req.body);  // Log the POST request body to the console
-  res.redirect(`/urls/${shortUrl}`);
+  res.redirect(`/urls`);
 });
 
 app.post("/urls/:shortURL/delete", (req, res) => {
@@ -63,6 +63,18 @@ app.post("/urls/:shortURL/delete", (req, res) => {
   res.redirect(`/urls`);
 });
 
+app.post("/urls/:shortURL/update", (req, res) => {
+  shortUrl = req.params.shortURL;
+  res.redirect(`/urls/${shortUrl}`);
+});
+
+app.post("/urls/:shortURL", (req, res) => {
+  //console.log (urlDatabase[req.params.shortURL].longURL);
+  console.log(req.params)
+  console.log('Body parsed ', req.body);
+  urlDatabase[req.params.shortURL] = req.body.longURL;
+  res.redirect(`/urls`);
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
