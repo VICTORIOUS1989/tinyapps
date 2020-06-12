@@ -12,27 +12,27 @@
 
 
 
-      <!--Register/ Login/ Logout-->
-      <div class="form-inline" style="margin-left: 600px"> 
-        <% if (username) {%>
-          <form class="form-inline" method="POST" action="/logout">
-            <a class="nav-item nav-link inline" style="padding: 20px">Logged in as <%=username%></a>
-            <button type="submit" class="btn btn-outline-secondary">Logout</button>
-          </form>
-        <%} else {%>
-          <div class="form-inline" style="margin-left: 600px"> 
-            <form method="POST" action="/login">
-            <input type="text" id="name" name="username">
-            <button type="submit" class="btn btn-outline-secondary">Login</button>       
-            </form>      
-          </div>
-        <%}%>
-      </div>
+    </div>
 
-      </div>
-      </div>
-      </nav>
-      </header>
+    <!-- if there is no user_id, show the login form -->
+    <% if(!user) { %>  
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/urls/login">Login</a>
+        <a class="nav-item nav-link" href="/urls/register">Register</a>
+    </div>
+    <!-- if there is a user_id, show the email address and a logout button -->
+    <% } else{ %>
+      <a>Logged In As: <%= user.email %></a>
+      <form class="form-inline" action="/logout?_method=DELETE" method="POST">
+        <div class="form-group mb-2">
+          <button type="logout" class="btn btn-outline-dark" style="margin: 1em">Logout</button>
+        </div>
+      </form>
+    <% } %>
+  
+   
 
+  </nav>
+</header>
 
 
