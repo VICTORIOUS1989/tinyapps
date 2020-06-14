@@ -15,24 +15,17 @@
     </div>
 
     <!-- if there is no user_id, show the login form -->
-    <% if(!user) { %>  
-      <div class="navbar-nav">
-        <a class="nav-item nav-link" href="/urls/login">Login</a>
-        <a class="nav-item nav-link" href="/urls/register">Register</a>
-    </div>
-    <!-- if there is a user_id, show the email address and a logout button -->
-    <% } else{ %>
-      <a>Logged In As: <%= user.email %></a>
-      <form class="form-inline" action="/logout?_method=DELETE" method="POST">
-        <div class="form-group mb-2">
-          <button type="logout" class="btn btn-outline-dark" style="margin: 1em">Logout</button>
-        </div>
+    <% if (userID) { %>
+      <form action="/logout" method="POST">
+        <label for="email">Logged In as: <%= userID.email %>!</label>
+        <button type="submit" class="btn btn-outline-dark">Logout</a>
       </form>
-    <% } %>
-  
-   
-
-  </nav>
+      <% } else { %>
+      <a class="btn btn-outline-dark" href="/login">Login</button>
+        <a class="btn btn-outline-dark" href="/registration">Register</a>
+        <% } %>
+    </div>
+  </div>
+</nav>
 </header>
-
 
